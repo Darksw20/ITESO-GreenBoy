@@ -6,11 +6,22 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import User,greenhouse,graphs
+from django.db.models import Q
 from .serializers import UserSerializer,GreenhouseSerializer,GraphSerializer
+
+import pdb
+
 
 class UserList(APIView):
     def get(self,request):
+        print(request)
         user1 = User.objects.all()
+        serializer = UserSerializer(user1,many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        print(request)
+        user1 = User.objects.filter(Q(username="Darksw20")|Q(password="Prueba"))
         serializer = UserSerializer(user1,many=True)
         return Response(serializer.data)
 
