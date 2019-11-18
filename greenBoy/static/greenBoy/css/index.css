@@ -1,0 +1,11 @@
+html,body{  
+    background-image: url("../images/greenhouse.jpg");
+    height: 100%;
+}
+.login-card{
+    margin-top: 50%;
+    background-color: rgba(48,132,70,1);
+    color: white;
+    border-radius: 5%;
+    padding: 25px;
+}

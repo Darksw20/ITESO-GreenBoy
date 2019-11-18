@@ -15,7 +15,7 @@ class UserList(APIView):
         return Response(serializer.data)
 
 def index(request):
-    return HttpResponse("Hello World. Esto anda comenzando")
+    return render(request,"login/login.html")
 def register(request):
     return HttpResponse("Hello World. Registro conectado")
 def dashboard(request):
