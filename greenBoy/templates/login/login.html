@@ -16,8 +16,8 @@
             <div class="col-sm"></div>
             <div class="col-sm">
                 <div class="login-card">
-                    <div>
-                        <img>
+                    <div class="text-center">
+                        <img class="login-logo" src="{% static "greenBoy/images/logo.png" %}">
                     </div>
                     <form class="h-100 align-middle justify-content-center">
                         <div class="form-group">
@@ -32,8 +32,8 @@
                         </div>
                         <div style="text-align:center">
                             <div class="col-sm">
-                                <button class="btn btn-primary" style="background-color: rgb(50,50,50); border-color: rgb(50,50,50);" type="submit">Submit</button>
-                                <a class="btn btn-primary" href="./register" style="background-color: rgb(50,50,50); border-color: rgb(50,50,50);">Register</a>
+                                <button class="btn btn-primary" style="background-color: rgb(50,50,50); border-color: rgb(50,50,50);" type="submit">Sign in</button>
+                                <a class="btn btn-primary" href="./register" style="background-color: rgb(50,50,50); border-color: rgb(50,50,50);">Sign up</a>
                             </div>
                         </div>
                     </form>
@@ -44,5 +44,6 @@
         </div>
     </div>
 </body>
+<script src="{% static "greenBoy/js/login.js" %}"></script>
 
 </html>

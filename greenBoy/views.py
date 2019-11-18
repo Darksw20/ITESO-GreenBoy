@@ -17,8 +17,8 @@ class UserList(APIView):
 def index(request):
     return render(request,"login/login.html")
 def register(request):
-    return HttpResponse("Hello World. Registro conectado")
+    return render(request,"register/register.html")
 def dashboard(request):
-    return HttpResponse("Hello World. Dashboard conectado")
+    return render(request,"dashboard/dash.html")
 
 # Create your views here.

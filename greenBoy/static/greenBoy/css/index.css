@@ -9,3 +9,6 @@ html,body{
     border-radius: 5%;
     padding: 25px;
 }
+img.login-logo{
+    height: 100px;
+}

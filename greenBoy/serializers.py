@@ -5,7 +5,7 @@ from .models import User,greenhouse,graphs
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id_user','username','password')
+        fields = ('id_user','username','password','email')
 
 class GreenhouseSerializer(ModelSerializer):
     class Meta:
