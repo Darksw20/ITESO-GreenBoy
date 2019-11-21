@@ -13,44 +13,44 @@
 </head>
 
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <div class="row">
             <div class="col-sm"></div>
             <div class="col-sm">
-                <div class="login-card">
+                <div class="register-card">
                     <div class="text-center">
                         <h3>Llene sus datos</h3>
                     </div>
-                    <form class="h-100 align-middle justify-content-center">
+                    <div class="h-100 align-middle justify-content-center">
                         <div class="form-group">
                             <label for="username">Nombre de usuario</label>
-                            <input type="username" class="form-control" id="username" aria-describedby="usernameHelp"
+                            <input v-model="username" type="username" class="form-control" id="username" aria-describedby="usernameHelp"
                                 placeholder="Enter username">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                                placeholder="Enter email">
+                            <input v-model="email" type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                                placeholder="example: something@yourdomain.com">
                         </div>
                         <div class="form-group">
                             <label for="Password">Contraseña</label>
-                            <input type="password" class="form-control" id="Password" placeholder="example: something@yourdomain.com">
-                            <small id="PasswordHelp" class="form-text text-muted" style="color: white!important;">Su contraseña debe contener de 6 a 15 caracteres y un numero.</small>
+                            <input v-model="password" type="password" class="form-control" id="Password" placeholder="Enter password">
+                            <small id="PasswordHelp" class="form-text text-muted" style="color: gray!important;">Su contraseña debe contener de 6 a 15 caracteres y un numero.</small>
                         </div>
                         <div class="form-group">
                             <label for="vPassword">Verifica tu contraseña</label>
-                            <input type="password" class="form-control" id="vPassword" placeholder="example: something@yourdomain.com">
+                            <input v-model="vpassword" type="password" class="form-control" id="vPassword" placeholder="Enter password">
                         </div>
                         <div style="text-align:center">
                             <div class="col-sm">
                                 <button class="btn btn-primary"
                                     style="background-color: rgb(50,50,50); border-color: rgb(50,50,50);"
-                                    type="submit">Register</button>
+                                    v-on:click="register">Register</button>
                                 <a class="btn btn-primary" href="./"
                                     style="background-color: rgb(50,50,50); border-color: rgb(50,50,50);">Sign in</a>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
             </div>

@@ -4,8 +4,15 @@ html,body{
 }
 .login-card{
     margin-top: 50%;
-    background-color: rgba(48,132,70,1);
-    color: white;
+    background-color: white;
+    color: green;
+    border-radius: 5%;
+    padding: 25px;
+}
+.register-card{
+    margin-top: 20%;
+    background-color: white;
+    color: green;
     border-radius: 5%;
     padding: 25px;
 }

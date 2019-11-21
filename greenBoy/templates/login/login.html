@@ -21,12 +21,12 @@
                     <div class="text-center">
                         <img class="login-logo" src="{% static "greenBoy/images/logo.png" %}">
                     </div>
-                    <form class="h-100 align-middle justify-content-center">
+                    <div class="h-100 align-middle justify-content-center">
+                        {% csrf_token %} 
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input v-model="username" type="username" class="form-control" id="username" aria-describedby="usernameHelp"
                             placeholder="Enter username">
-                            <small id="usernameHelp" class="form-text text-muted" style="color: white!important;">Lets get started.</small>
                         </div>
                         <div class="form-group">
                             <label for="Password">Password</label>
@@ -38,7 +38,7 @@
                                 <a class="btn btn-primary" href="./register" style="background-color: rgb(50,50,50); border-color: rgb(50,50,50);">Sign up</a>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 
             </div>

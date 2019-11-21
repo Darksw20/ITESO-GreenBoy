@@ -4,20 +4,21 @@ new Vue({
         username: "",
         password: ""
     },
-    mounted(){},
+    mounted(){
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+    },
     methods:{
         login:function(){
-            console.log("Se enviaron"+this.username+" "+this.password)
-
             axios.post("webservices/signin",{
                 user: this.username,
                 passw: this.password
-            }).then(resp=>{
-                switch(resp.data.response){
-
-                    default:
-                        console.log("Se enviaron"+this.username+" "+this.password)
-                       // window.location = ""
+            })
+            .then(resp=>{
+                if(resp.data == 1){
+                    window.location.href="http://localhost:8000/greenBoy/dash";
+                }else{
+                    alert("Usuario no existe")
                 }
             })
         }

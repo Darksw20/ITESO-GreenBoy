@@ -10,8 +10,9 @@ class User(models.Model,):
     def __str__(self):
         return self.username
 
-class greenhouse(models.Model,):
+class Greenhouse(models.Model,):
     id_green = models.AutoField(primary_key=True)
+    greenName = models.CharField(max_length=40,default="")
     temp_max = models.FloatField()
     temp_min = models.FloatField()
     hum_max = models.FloatField()
@@ -19,14 +20,14 @@ class greenhouse(models.Model,):
     fk_id_user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id_green
+        return str(self.id_green)
 
-class graphs(models.Model,):
+class Graphs(models.Model,):
     id_graph = models.AutoField(primary_key=True)
     time = models.TimeField(auto_now_add=True)
     temp = models.FloatField()
     hum = models.FloatField()
-    fk_id_green = models.ForeignKey(greenhouse,on_delete=models.CASCADE)
+    fk_id_green = models.ForeignKey(Greenhouse,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id_graph
+        return str(self.id_graph)

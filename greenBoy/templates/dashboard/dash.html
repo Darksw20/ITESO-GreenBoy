@@ -1,28 +1,135 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Dashboard</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static "greenBoy/css/index.css" %}">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <div style="height:380px!important;background-color: white; margin-top: 15%">
-                        <canvas id="myChart"></canvas>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "greenBoy/css/index.css" %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row"><a href="/greenBoy" class="btn btn-danger" style="margin: 20px -20px 0 0">Log out</a></div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div
+                    style="background-color: rgba(48,132,70,1);color: white;border-radius: 5%;text-align: center;margin:10px;padding:5px;padding-bottom: 10px">
+                    <div>
+                        <h2>Bienvenido Ricardo</h2>
+                    </div>
+                    <div class="col-sm-12" style="display: inline-flex">
+                        <div class="col-sm-4">
+                            <select class="custom-select">
+                                <option>Green 1</option>
+                                <option>Green 2</option>
+                                <option>Green 3</option>
+                            </select>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <button type="button" class="btn btn-dark" data-toggle="modal"
+                                data-target="#addModal">Add</button>
+                            <button type="button" class="btn btn-dark" data-toggle="modal"
+                                data-target="#editModal">Edit</button>
+                            <button class="btn btn-danger">Delete</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-2"></div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div style="height:380px!important;background-color: white; margin-top: 1%">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <!-- addModal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add new GreenHouse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="greenName">Nombre del invernadero</label>
+                        <input type="text" class="form-control" id="greenName" aria-describedby="greenNameHelp"
+                            placeholder="Ingresa el nombre de tu invernadero">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add</button>
+                </div>
             </div>
         </div>
-    </body>
-    <script src="{% static "greenBoy/js/dash.js" %}"></script>
+    </div>
+    <!-- addModal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit GreenHouse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="greenTM">Temperatura Maxima</label>
+                        <input type="number" class="form-control" id="greenTM" aria-describedby="greenTMHelp"
+                            placeholder="Ejemplo: 25.0">
+                    </div>
+                    <div class="form-group">
+                        <label for="greenTMi">Temperatura Minima</label>
+                        <input type="number" class="form-control" id="greenTMi" aria-describedby="greenTMiHelp"
+                            placeholder="Ejemplo: 25.0">
+                    </div>
+                    <div class="form-group">
+                        <label for="greenHM">Humedad Maxima</label>
+                        <input type="number" class="form-control" id="greenHM" aria-describedby="greenHMHelp"
+                            placeholder="Ejemplo: 25.0">
+                    </div>
+                    <div class="form-group">
+                        <label for="greenHMi">Humedad Minima</label>
+                        <input type="number" class="form-control" id="greenHMi" aria-describedby="greenHMiHelp"
+                            placeholder="Ejemplo: 25.0">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{% static "greenBoy/js/dash.js" %}"></script>
+
 </html>
