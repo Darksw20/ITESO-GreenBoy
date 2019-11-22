@@ -5,7 +5,13 @@ new Vue({
     data: {
         invArray: [],
         invSelected: "",
-        name: ""
+        name: "",
+        invName: "",
+        tempMax: null,
+        tempMin: null,
+        humMax: null,
+        humMin: null,
+        editInvName: ""
     },
     mounted() {
         axios.defaults.xsrfCookieName = 'csrftoken'
@@ -20,6 +26,11 @@ new Vue({
                 if (resp.data.greenData.length > 0) {
                     this.invArray = resp.data.greenData
                     this.invSelected = this.invArray[0].greenName
+                    this.tempMax = resp.data.greenData[0].temp_max
+                    this.tempMin = resp.data.greenData[0].temp_min
+                    this.humMax = resp.data.greenData[0].hum_max
+                    this.humMin = resp.data.greenData[0].hum_min
+                    this.editInvName = resp.data.greenData[0].greenName
                 }
                 return resp.data.greenData.length;
             })
@@ -62,6 +73,36 @@ new Vue({
                             }
                         }
                     });
+                }
+            })
+        },
+        newGreen: function(){
+            axios.post('webservices/newGreen',{ greenName: this.invName })
+            .then(resp=>{
+                location.reload();
+            })
+        },
+        delGreen: function(){
+            axios.post('webservices/delGreen',{ greenName: this.invSelected })
+            .then(resp=>{
+                location.reload();
+            })
+        },
+        saveData: function(){
+            axios.post('webservices/setDataGreen',{
+                temp_max: this.tempMax,
+                temp_min: this.tempMin,
+                hum_max: this.humMax,
+                hum_min: this.humMin,
+                nameInv: this.editInvName,
+                greenName: this.invSelected
+            })
+            .then(resp=>{
+                if(resp.data.message = "GREEN_UPDATED"){
+                    alert("Datos cambiados con exito")
+                    location.reload();
+                }else{
+                    alert("ERROR")
                 }
             })
         }

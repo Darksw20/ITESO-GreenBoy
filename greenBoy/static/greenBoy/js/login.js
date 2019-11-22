@@ -15,10 +15,12 @@ new Vue({
                 passw: this.password
             })
             .then(resp=>{
-                if(resp.data == 1){
+                if(resp.data.message == "USER_AUTHENTICATED"){
                     window.location.href="http://localhost:8000/greenBoy/dash";
-                }else{
+                }else if(resp.data.message == "INVALID_USER"){
                     alert("Usuario no existe")
+                }else{
+                    alert("ERROR")
                 }
             })
         }

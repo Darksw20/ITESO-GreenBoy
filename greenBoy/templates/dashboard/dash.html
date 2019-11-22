@@ -43,9 +43,9 @@
                         <div class="col-sm-8">
                             <button type="button" class="btn btn-dark" data-toggle="modal"
                                 data-target="#addModal">Add</button>
-                            <button type="button" class="btn btn-dark" data-toggle="modal"
+                            <button v-if="invSelected != ''" type="button" class="btn btn-dark" data-toggle="modal"
                                 data-target="#editModal">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <button v-if="invSelected != ''" class="btn btn-danger" v-on:click="delGreen">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -64,8 +64,7 @@
             </div>
             <div class="col-sm-1"></div>
         </div>
-    </div>
-    <!-- addModal -->
+        <!-- addModal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -79,13 +78,13 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="greenName">Nombre del invernadero</label>
-                        <input type="text" class="form-control" id="greenName" aria-describedby="greenNameHelp"
+                        <input v-model="invName" type="text" class="form-control" id="greenName" aria-describedby="greenNameHelp"
                             placeholder="Ingresa el nombre de tu invernadero">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="newGreen">Add</button>
                 </div>
             </div>
         </div>
@@ -103,33 +102,40 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="greenName">Nombre del invernadero</label>
+                        <input v-model="editInvName" type="text" class="form-control" id="greenName" aria-describedby="greenNameHelp"
+                            placeholder="Ingresa el nuevo nombre de tu invernadero">
+                    </div>
+                    <div class="form-group">
                         <label for="greenTM">Temperatura Maxima</label>
-                        <input type="number" class="form-control" id="greenTM" aria-describedby="greenTMHelp"
+                        <input v-model="tempMax" type="number" class="form-control" id="greenTM" aria-describedby="greenTMHelp"
                             placeholder="Ejemplo: 25.0">
                     </div>
                     <div class="form-group">
                         <label for="greenTMi">Temperatura Minima</label>
-                        <input type="number" class="form-control" id="greenTMi" aria-describedby="greenTMiHelp"
+                        <input v-model="tempMin" type="number" class="form-control" id="greenTMi" aria-describedby="greenTMiHelp"
                             placeholder="Ejemplo: 25.0">
                     </div>
                     <div class="form-group">
                         <label for="greenHM">Humedad Maxima</label>
-                        <input type="number" class="form-control" id="greenHM" aria-describedby="greenHMHelp"
+                        <input v-model="humMax" type="number" class="form-control" id="greenHM" aria-describedby="greenHMHelp"
                             placeholder="Ejemplo: 25.0">
                     </div>
                     <div class="form-group">
                         <label for="greenHMi">Humedad Minima</label>
-                        <input type="number" class="form-control" id="greenHMi" aria-describedby="greenHMiHelp"
+                        <input v-model="humMin" type="number" class="form-control" id="greenHMi" aria-describedby="greenHMiHelp"
                             placeholder="Ejemplo: 25.0">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-primary" v-on:click="saveData" data-dismiss="modal">Save Changes</button>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    
 </body>
 <script src="{% static "greenBoy/js/dash.js" %}"></script>
 

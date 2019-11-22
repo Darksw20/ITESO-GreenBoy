@@ -19,10 +19,12 @@ new Vue({
                     email: this.email
                 })
                 .then(resp=>{
-                    if(resp.data == 1){
-                        window.location.href="http://localhost:8000/greenBoy/dash";
-                    }else{
+                    if(resp.data.message === "USER_REGISTRED"){
+                        window.location.href = "http://localhost:8000/greenBoy/dash";
+                    }else if(resp.data.message === "USER_ALREADY_EXIST"){
                         alert("Usuario ya existe")
+                    }else{
+                        alert("ERROR")
                     }
                 })
             }else{

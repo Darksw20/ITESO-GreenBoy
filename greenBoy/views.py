@@ -35,6 +35,8 @@ class Register(APIView):
         elif user1.count() == 0:
             userinsert = User.objects.create(username=request.data["user"],password=request.data["passw"],email=request.data["email"])
             userinsert.save()
+            request.session["id_user"] = userinsert.id_user
+            request.session["user"] = userinsert.username
             return Response({"status":200,"message": "USER_REGISTRED"})
         else:
             return Response({"status":200,"message": "ERROR"})
@@ -44,7 +46,7 @@ class GetInfoGreen(APIView):
         gH = Greenhouse.objects.filter(fk_id_user_id=request.session["id_user"])
         serializer = GreenhouseSerializer(gH, many=True)
         return Response({"status":200,"message":"GREEN_INFO_DELIVERED","user": request.session["user"],"greenData": serializer.data})
-
+ 
 class InvAPI(APIView):
     def get(self,request):
         gH = Greenhouse.objects.filter(id_green=request.GET["id_green"])
@@ -59,10 +61,10 @@ class InvAPI(APIView):
 
 class NewGreen(APIView):
     def post(self,request):
-        gHQ = Greenhouse.objects.find(Q(greenName=request.data["greenName"])&Q(fk_id_user_id=request.session["id_user"]))
+        gHQ = Greenhouse.objects.filter(Q(greenName=request.data["greenName"])&Q(fk_id_user_id=request.session["id_user"]))
         if gHQ.count() == 0:
-            user = User(id_user=request.session["id_user"])
-            gH = Greenhouse.objects.create(greenName=request.data["greenName"],temp_max=30.0,temp_min=25.0,hum_max=50.0,hum_min=45.0,fk_id_user_id=user)
+            #user = User(id_user=request.session["id_user"])
+            gH = Greenhouse.objects.create(greenName=request.data["greenName"],temp_max=30.0,temp_min=25.0,hum_max=50.0,hum_min=45.0,fk_id_user_id=request.session["id_user"])
             gH.save()
             return Response({"status": 200,"message": "GREEN_CREATED"})
         else:
@@ -70,17 +72,17 @@ class NewGreen(APIView):
 
 class DelGreen(APIView):
     def post(self,request):
-        Greenhouse.objects.find(Q(greenName=request.data["greenName"])&Q(fk_id_user_id=request.session["id_user"])).delete()
+        Greenhouse.objects.filter(Q(greenName=request.data["greenName"])&Q(fk_id_user_id=request.session["id_user"])).delete()
         return Response({"status": 200,"message": "GREEN_DELETED"})
 
 class setDataGreen(APIView):
     def post(self,request):
-        gHQ = Greenhouse.objects.find(Q(greenName=request.data["greenName"])&Q(fk_id_user_id=request.session["id_user"]))
-        gHQ.temp_max = request.data["temp_max"]
-        gHQ.temp_min = request.data["temp_min"]
-        gHQ.hum_max = request.data["hum_max"]
-        gHQ.hum_min = request.data["hum_min"]
-        gHQ.save()
+        gHQ = Greenhouse.objects.filter(Q(greenName=request.data["greenName"])&Q(fk_id_user_id=request.session["id_user"]))
+        gHQ.update(temp_max = request.data["temp_max"])
+        gHQ.update(temp_min = request.data["temp_min"])
+        gHQ.update(hum_max = request.data["hum_max"])
+        gHQ.update(hum_min = request.data["hum_min"])
+        gHQ.update(greenName = request.data["nameInv"])
         return Response({"status": 200,"message": "GREEN_UPDATED"})
 
 def index(request):
