@@ -23,22 +23,20 @@
 </head>
 
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <div class="row"><a href="/greenBoy" class="btn btn-danger" style="margin: 20px -20px 0 0">Log out</a></div>
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
                 <div
                     style="background-color: rgba(48,132,70,1);color: white;border-radius: 5%;text-align: center;margin:10px;padding:5px;padding-bottom: 10px">
                     <div>
-                        <h2>Bienvenido Ricardo</h2>
+                        <h2>Bienvenido [[name]]</h2>
                     </div>
                     <div class="col-sm-12" style="display: inline-flex">
                         <div class="col-sm-4">
-                            <select class="custom-select">
-                                <option>Green 1</option>
-                                <option>Green 2</option>
-                                <option>Green 3</option>
+                            <select v-model="invSelected" class="custom-select">
+                                <option v-for="invArrays in invArray">[[invArrays.greenName]]</option>
                             </select>
 
                         </div>
@@ -52,16 +50,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2"></div>
+            <div class="col-sm-1"></div>
         </div>
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-                <div style="height:380px!important;background-color: white; margin-top: 1%">
-                    <canvas id="myChart"></canvas>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div v-if="invSelected != ''" style="height:380px!important;background-color: white; margin-top: 1%;border-radius: 5px;">
+                    <canvas id="myChart" height="210" style="height:380px!important"></canvas>
+                </div>
+                <div v-if="invSelected == ''" style="height:380px!important; text-align: center; padding-top: 25%;background-color: white; margin-top: 1%;border-radius: 5px;">
+                    <h1>Agrega un nuevo invernadero</h1>
                 </div>
             </div>
-            <div class="col-sm-2"></div>
+            <div class="col-sm-1"></div>
         </div>
     </div>
     <!-- addModal -->

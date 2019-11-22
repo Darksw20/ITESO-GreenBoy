@@ -10,7 +10,7 @@ class UserSerializer(ModelSerializer):
 class GreenhouseSerializer(ModelSerializer):
     class Meta:
         model = Greenhouse
-        fields = ('id_green','temp_max','temp_min','hum_max','hum_min','fk_id_user')
+        fields = ('id_green','temp_max','temp_min','hum_max','hum_min','fk_id_user','greenName')
 
 class GraphSerializer(ModelSerializer):
     class Meta:

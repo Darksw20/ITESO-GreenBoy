@@ -24,7 +24,7 @@ class Greenhouse(models.Model,):
 
 class Graphs(models.Model,):
     id_graph = models.AutoField(primary_key=True)
-    time = models.TimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now_add=True)
     temp = models.FloatField()
     hum = models.FloatField()
     fk_id_green = models.ForeignKey(Greenhouse,on_delete=models.CASCADE)
