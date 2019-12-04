@@ -11,6 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+
+os.environ["PROXIES"] = "192.168.43.140:8000"
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'GreenBoyWeb.settings')
 
 application = get_wsgi_application()

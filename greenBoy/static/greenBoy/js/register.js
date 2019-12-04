@@ -20,7 +20,7 @@ new Vue({
                 })
                 .then(resp=>{
                     if(resp.data.message === "USER_REGISTRED"){
-                        window.location.href = "http://localhost:8000/greenBoy/dash";
+                        window.location.href = "./dash";
                     }else if(resp.data.message === "USER_ALREADY_EXIST"){
                         alert("Usuario ya existe")
                     }else{

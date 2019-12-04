@@ -16,7 +16,7 @@ new Vue({
             })
             .then(resp=>{
                 if(resp.data.message == "USER_AUTHENTICATED"){
-                    window.location.href="http://localhost:8000/greenBoy/dash";
+                    window.location.href="./dash";
                 }else if(resp.data.message == "INVALID_USER"){
                     alert("Usuario no existe")
                 }else{
