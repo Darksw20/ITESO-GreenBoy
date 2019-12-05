@@ -29,13 +29,13 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
                 <div
-                    style="background-color: rgba(48,132,70,1);color: white;border-radius: 5%;text-align: center;margin:10px;padding:5px;padding-bottom: 10px">
+                    style="background-color: rgb(85, 125, 117);color: white;border-radius: 5%;text-align: center;margin:10px;padding:5px;padding-bottom: 10px">
                     <div>
                         <h2>Bienvenido [[name]]</h2>
                     </div>
                     <div class="col-sm-12" style="display: inline-flex">
                         <div class="col-sm-4">
-                            <select v-model="invSelected" class="custom-select">
+                            <select v-model="invSelected" class="custom-select" v-on:change="calale">
                                 <option v-for="invArrays in invArray">[[invArrays.greenName]]</option>
                             </select>
 
@@ -138,5 +138,6 @@
     
 </body>
 <script src="{% static "greenBoy/js/dash.js" %}"></script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 
 </html>

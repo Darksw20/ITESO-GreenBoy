@@ -46,7 +46,14 @@ class GetInfoGreen(APIView):
         gH = Greenhouse.objects.filter(fk_id_user_id=request.session["id_user"])
         serializer = GreenhouseSerializer(gH, many=True)
         return Response({"status":200,"message":"GREEN_INFO_DELIVERED","user": request.session["user"],"greenData": serializer.data})
- 
+    def post(self,request):
+        gHO = Greenhouse.objects.filter(greenName=request.data["greenName"])
+        gH = Graphs.objects.filter(fk_id_green=gHO[0].id_green)
+        if gH.count() == 0:
+            return Response({"status":200,"message":"NO_GRAPHS"})
+        else:
+            serializer = GraphSerializer(gH,many=True)
+            return Response({"status":200,"message":"GRAPHS_DELIVERED","graphsData":serializer.data})
 class InvAPI(APIView):
     def get(self,request):
         gH = Greenhouse.objects.filter(id_green=request.GET["id_green"])
